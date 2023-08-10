@@ -19,10 +19,9 @@ jobs:
       - name: multiline create string
         run: |
           MULTILINE_STRING=$(cat << EOF
-          | METRIC | RESULT | LINK |
-          | ----- | ----- | ----- |
-          | http-success-rate | success | [Prometheus Chart](https://prometheus.sso.gke1-west4.wsf-dev-0.wstack.net/graph?g0.expr=) |
-          | grpc-success-rate | success | [Prometheus Chart](https://prometheus.sso.gke1-west4.wsf-dev-0.wstack.net/graph?g0.expr=) |
+          first line
+          second line
+          third line
           EOF
           )
           echo "MULTILINE_STRING<<EOF" >> $GITHUB_ENV
