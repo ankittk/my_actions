@@ -19,9 +19,10 @@ jobs:
       - name: create string
         run: |
           MY_STRING=$(cat << EOF
-          first line
-          second line
-          third line
+          | METRIC | RESULT | LINK |
+          | ----- | ----- | ----- |
+          | http-success-rate | success | [Prometheus Chart](https://prometheus.sso.gke1-west4.wsf-dev-0.wstack.net/graph?g0.expr=) |
+          | grpc-success-rate | success | [Prometheus Chart](https://prometheus.sso.gke1-west4.wsf-dev-0.wstack.net/graph?g0.expr=) |
           EOF
           )
           echo "MY_STRING<<EOF" >> $GITHUB_ENV
