@@ -31,5 +31,4 @@ jobs:
         id: my_string
       - name: display string
         run: |
-          echo "The string is: ${{ env.MY_STRING }}"
-
+          echo "The string is: ${{ env.name }}"
