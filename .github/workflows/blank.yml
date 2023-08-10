@@ -18,12 +18,16 @@ jobs:
 #           echo "The string is: ${{ steps.my_string.outputs.content }}"
       - name: create string
         run: |
-          echo "cat << EOF
+          name=$(cat << EOF
           | METRIC | RESULT | LINK |
           | ----- | ----- | ----- |
           | http-success-rate | success | [Prometheus Chart](https://prometheus.sso.gke1-west4.wsf-dev-0.wstack.net/graph?g0.expr=) |
           | grpc-success-rate | success | [Prometheus Chart](https://prometheus.sso.gke1-west4.wsf-dev-0.wstack.net/graph?g0.expr=) |
-          EOF<<EOF" >> $GITHUB_ENV
+          EOF
+          )
+          echo "name<<EOF" >> $GITHUB_ENV
+          echo "$name" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
         id: my_string
       - name: display string
         run: |
