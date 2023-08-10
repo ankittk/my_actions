@@ -1,0 +1,34 @@
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  test_strings:
+    name: test strings
+    runs-on: ubuntu-latest
+    steps:
+      - name: create string
+        run: |
+          MY_STRING="hello world"
+          echo "::set-output name=content::$MY_STRING"
+        id: my_string
+      - name: display string
+        run: |
+          echo "The string is: ${{ steps.my_string.outputs.content }}"
+      - name: multiline create string
+        run: |
+          MULTILINE_STRING=$(cat << EOF
+          | METRIC | RESULT | LINK |
+          | ----- | ----- | ----- |
+          | http-success-rate | success | [Prometheus Chart](https://prometheus.sso.gke1-west4.wsf-dev-0.wstack.net/graph?g0.expr=) |
+          | grpc-success-rate | success | [Prometheus Chart](https://prometheus.sso.gke1-west4.wsf-dev-0.wstack.net/graph?g0.expr=) |
+          EOF
+          )
+          echo "MULTILINE_STRING<<EOF" >> $GITHUB_ENV
+          echo "$MULTILINE_STRING" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+        id: multiline_string
+      - name: display string
+        run: |
+          echo "The string is: ${{ env.MULTILIN_STRING }}"
