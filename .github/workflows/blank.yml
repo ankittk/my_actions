@@ -8,26 +8,27 @@ jobs:
     name: test strings
     runs-on: ubuntu-latest
     steps:
+#       - name: create string
+#         run: |
+#           MY_STRING="hello world"
+#           echo "::set-output name=content::$MY_STRING"
+#         id: my_string
+#       - name: display string
+#         run: |
+#           echo "The string is: ${{ steps.my_string.outputs.content }}"
       - name: create string
         run: |
-          MY_STRING="hello world"
-          echo "::set-output name=content::$MY_STRING"
-        id: my_string
-      - name: display string
-        run: |
-          echo "The string is: ${{ steps.my_string.outputs.content }}"
-      - name: multiline create string
-        run: |
-          MULTILINE_STRING=$(cat << EOF
+          MY_STRING=$(cat << EOF
           first line
           second line
           third line
           EOF
           )
-          echo "MULTILINE_STRING<<EOF" >> $GITHUB_ENV
-          echo "$MULTILINE_STRING" >> $GITHUB_ENV
+          echo "MY_STRING<<EOF" >> $GITHUB_ENV
+          echo "$MY_STRING" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-        id: multiline_string
+        id: my_string
       - name: display string
         run: |
-          echo "The string is: ${{ env.MULTILIN_STRING }}"
+          echo "The string is: ${{ env.MY_STRING }}"
+
